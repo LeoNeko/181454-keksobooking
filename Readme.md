@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Антон Шибеко](https://up.htmlacademy.ru/javascript/11/user/181454).
-* Наставник: `Неизвестно`.
+* Наставник: [Екатерина Кащенко](https://htmlacademy.ru/profile/id109008).
 
 ---
 
