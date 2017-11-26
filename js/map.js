@@ -9,10 +9,8 @@ userDialog.classList.remove('map--faded');
 
 // Вставка плашек в map__pins
 var similarListElement = userDialog.querySelector('.map__pins');
-var similarListElementDes = userDialog.querySelector('.map__pins');
 var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 var similarDescriptionTemplate = document.querySelector('template').content.querySelector('.map__card');
-console.log(similarDescriptionTemplate);
 
 var fragment = document.createDocumentFragment();
 var fragmentDes = document.createDocumentFragment();
@@ -24,13 +22,13 @@ function randomNumber(min, max) {
 }
 
 function randomFeatures(lenght, arr) {
-  var line = '';
+  var lines = '';
 
   for (var i = 0; i < lenght; i++) {
-    var line = line + arr[i];
+    lines = lines + arr[i];
   }
 
-  return line;
+  return lines;
 }
 
 // Функция отрисовки плашки одного пункта о съеме
@@ -47,15 +45,14 @@ function renderRented(renta) {
 // Принимает объект
 function renderRentedDescription(renta) {
   var desElement = similarDescriptionTemplate.cloneNode(true);
-  console.log(desElement.getElementsByTagName('p')[2]);
-  console.log(desElement.getElementsByTagName('p')[3]);
+
   desElement.querySelector('h3').textContent = renta.offer.title;
   desElement.querySelector('small').textContent = renta.location.x + ' ' + renta.location.y;
-  desElement.querySelector('.popup__price').textContent = renta.offer.price + "₽/ночь";
+  desElement.querySelector('.popup__price').textContent = renta.offer.price + '₽/ночь';
   desElement.querySelector('h4').textContent = renta.offer.type;
   desElement.querySelector('h4').textContent = renta.offer.type;
-  desElement.getElementsByTagName ('p')[2].textContent = renta.offer.rooms + ' для ' + renta.offer.guests;
-  desElement.getElementsByTagName ('p')[3].textContent = 'Заезд после' + renta.offer.checkin + ', выезд до ' + renta.offer.checkout;
+  desElement.getElementsByTagName('p')[2].textContent = renta.offer.rooms + ' для ' + renta.offer.guests;
+  desElement.getElementsByTagName('p')[3].textContent = 'Заезд после' + renta.offer.checkin + ', выезд до ' + renta.offer.checkout;
   desElement.setAttribute('style', 'top:' + renta.location.y + 'px;' + 'left:' + renta.location.x + 'px;');
   desElement.querySelector('img').src = renta.author.avatar;
   return desElement;
@@ -63,7 +60,7 @@ function renderRentedDescription(renta) {
 
 // Заполненение массива объектами
 function fillRented(Count) {
-  var ADDRESS  = ['Большая уютная квартира', 'Маленькая неуютная квартира',
+  var ADDRESS = ['Большая уютная квартира', 'Маленькая неуютная квартира',
                   'Огромный прекрасный дворец', 'Маленький ужасный дворец',
                   'Красивый гостевой домик', 'Некрасивый негостеприимный домик',
                   'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -77,24 +74,24 @@ function fillRented(Count) {
   for (var i = 1; i < Count; i++) {
     RentaArr.push({
       author: {
-        avatar : 'img/avatars/user0' + i + '.png'
+        avatar: 'img/avatars/user0' + i + '.png'
       },
       offer: {
-        title : ADDRESS[randomNumber(1, ADDRESS.length)],
-        address : '',
-        price : randomNumber(1000, 1000000),
-        type : TYPE[randomNumber(1, TYPE.length)],
-        rooms : randomNumber(1000, 5),
-        guests : randomNumber(1, 3),
-        checkin : CHECKIN[randomNumber(0, CHECKIN.length - 1)],
-        checkout : CHECKOUT[randomNumber(0, CHECKOUT.length - 1)],
-        features : randomFeatures(FEATURES.length, FEATURES),
-        description : '',
-        photos : PHOTO
+        title: ADDRESS[randomNumber(1, ADDRESS.length)],
+        address: '',
+        price: randomNumber(1000, 1000000),
+        type: TYPE[randomNumber(1, TYPE.length)],
+        rooms: randomNumber(1000, 5),
+        guests: randomNumber(1, 3),
+        checkin: CHECKIN[randomNumber(0, CHECKIN.length - 1)],
+        checkout: CHECKOUT[randomNumber(0, CHECKOUT.length - 1)],
+        features: randomFeatures(FEATURES.length, FEATURES),
+        description: '',
+        photos: PHOTO
       },
       location: {
-        x : randomNumber(300, 900),
-        y : randomNumber(100, 500)
+        x: randomNumber(300, 900),
+        y: randomNumber(100, 500)
       }
     });
   }
