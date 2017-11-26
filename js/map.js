@@ -1,12 +1,21 @@
 'use strict';
 
+var RentaCount = 8;
+var RentaArr = [];
 
 // Показывает скрытый блок карты
 var userDialog = document.querySelector('.map');
 userDialog.classList.remove('map--faded');
 
+// Вставка плашек в map__pins
+var similarListElement = userDialog.querySelector('.map__pins');
+var similarListElementDes = userDialog.querySelector('.map__pins');
+var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
+var similarDescriptionTemplate = document.querySelector('template').content.querySelector('.map__card');
+console.log(similarDescriptionTemplate);
 
 var fragment = document.createDocumentFragment();
+var fragmentDes = document.createDocumentFragment();
 
 // Функция вывода случайного индекса массива.
 // Принимает длинну массива
@@ -14,30 +23,46 @@ function randomNumber(min, max) {
   return Math.floor((min + Math.random() * (max + 1 - min)));
 }
 
-function randomFeatures(lenght) {
+function randomFeatures(lenght, arr) {
   var line = '';
 
   for (var i = 0; i < lenght; i++) {
-    var line = line + FEATURES[i];
+    var line = line + arr[i];
   }
 
   return line;
 }
 
-// Функция отрисовки одного волшебника
+// Функция отрисовки плашки одного пункта о съеме
 // Принимает объект
-/*
-function renderWizard(wizard) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+function renderRented(renta) {
+  var pinElement = similarPinTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
-  return wizardElement;
-}*/
+  pinElement.setAttribute('style', 'top:' + renta.location.y + 'px;' + 'left:' + renta.location.x + 'px;');
+  pinElement.querySelector('img').src = renta.author.avatar;
+  return pinElement;
+}
+
+// Функция отрисовки описания одного пункта о съеме
+// Принимает объект
+function renderRentedDescription(renta) {
+  var desElement = similarDescriptionTemplate.cloneNode(true);
+  console.log(desElement.getElementsByTagName('p')[2]);
+  console.log(desElement.getElementsByTagName('p')[3]);
+  desElement.querySelector('h3').textContent = renta.offer.title;
+  desElement.querySelector('small').textContent = renta.location.x + ' ' + renta.location.y;
+  desElement.querySelector('.popup__price').textContent = renta.offer.price + "₽/ночь";
+  desElement.querySelector('h4').textContent = renta.offer.type;
+  desElement.querySelector('h4').textContent = renta.offer.type;
+  desElement.getElementsByTagName ('p')[2].textContent = renta.offer.rooms + ' для ' + renta.offer.guests;
+  desElement.getElementsByTagName ('p')[3].textContent = 'Заезд после' + renta.offer.checkin + ', выезд до ' + renta.offer.checkout;
+  desElement.setAttribute('style', 'top:' + renta.location.y + 'px;' + 'left:' + renta.location.x + 'px;');
+  desElement.querySelector('img').src = renta.author.avatar;
+  return desElement;
+}
 
 // Заполненение массива объектами
-function fillArrWizards(Count) {
+function fillRented(Count) {
   var ADDRESS  = ['Большая уютная квартира', 'Маленькая неуютная квартира',
                   'Огромный прекрасный дворец', 'Маленький ужасный дворец',
                   'Красивый гостевой домик', 'Некрасивый негостеприимный домик',
@@ -49,21 +74,21 @@ function fillArrWizards(Count) {
 
   var PHOTO = [];
 
-  for (var i = 0; i < Count; i++) {
-    wizards.push({
+  for (var i = 1; i < Count; i++) {
+    RentaArr.push({
       author: {
         avatar : 'img/avatars/user0' + i + '.png'
       },
       offer: {
         title : ADDRESS[randomNumber(1, ADDRESS.length)],
-        address : location.x + ' ' + location.y,
+        address : '',
         price : randomNumber(1000, 1000000),
         type : TYPE[randomNumber(1, TYPE.length)],
         rooms : randomNumber(1000, 5),
         guests : randomNumber(1, 3),
-        checkin : CHECKIN[randomNumber(1, CHECKIN.length)],
-        checkout : CHECKOUT[randomNumber(1, CHECKOUT.length)],
-        features : randomFeatures(1, FEATURES.length),
+        checkin : CHECKIN[randomNumber(0, CHECKIN.length - 1)],
+        checkout : CHECKOUT[randomNumber(0, CHECKOUT.length - 1)],
+        features : randomFeatures(FEATURES.length, FEATURES),
         description : '',
         photos : PHOTO
       },
@@ -74,11 +99,17 @@ function fillArrWizards(Count) {
     });
   }
 
-  return wizards;
+  return RentaArr;
 }
 
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
+fillRented(RentaCount);
+
+// Цикл заполнения
+for (var i = 0; i < RentaArr.length; i++) {
+  fragment.appendChild(renderRented(RentaArr[i]));
 }
+
+fragmentDes.appendChild(renderRentedDescription(RentaArr[0]));
 
 similarListElement.appendChild(fragment);
+userDialog.insertBefore(fragmentDes, userDialog.children[0]);
