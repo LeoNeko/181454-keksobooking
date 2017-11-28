@@ -32,14 +32,14 @@ function randomFeatures(lenght, arr) {
   var tresh = [];
   var dumb = randomNumber(0, lenght);
   var counter = dumb;
-  console.log(dumb);
+
   for (var i = 0; i <= dumb - 1; i++) {
     tresh.push(lines.indexOf(lines[randomNumber(0, counter)]));
     // lines.indexOf(lines.splice(counter, 1));
     // console.log(lines.splice(randomNumber(0, randomIndex), 1));
     counter--;
   }
-  console.log(tresh);
+
   return tresh;
 }
 
@@ -59,14 +59,15 @@ function renderRentedDescription(renta) {
   var desElement = similarDescriptionTemplate.cloneNode(true);
 
   // Указывает на юлок с классом popup__features
-  var featuresElement = desElement.querySelector('.popup__features');
+  // var featuresElement = desElement.querySelector('.popup__features');
 
   // Вырезает по значению номера индекса feature из шаблона
+  /*
   for (var i = 0; i <= 6; i++) {
     featuresElement.children[renta.offer.features[4]].className = 'pusto';
     // console.log(renta.offer.features[i]);
     // console.log(featuresElement.children[renta.offer.features[4]]);
-  }
+  }*/
 
   desElement.querySelector('h3').textContent = renta.offer.title;
   desElement.querySelector('small').textContent = renta.location.x + ' ' + renta.location.y;
