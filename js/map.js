@@ -7,7 +7,24 @@ var RentaArr = [];
 
 // Показывает скрытый блок карты
 var userDialog = document.querySelector('.map');
-userDialog.classList.remove('map--faded');
+
+var pinStart = document.querySelector('.map__pin--main');
+var formElement = document.querySelector('.notice__form');
+var formFieldsets = document.getElementsByClassName('form__element');
+
+/* ---------------------------------------------------------
+ *  Принимает массив полей формы
+ *
+ *  Производит переключение свойства Disabled для всех полей
+ *  формы, при вызове этой функции
+ */
+function fieldsetsToggle(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    arr[i].disabled = !arr[i].disabled;
+  }
+}
+
+fieldsetsToggle(formFieldsets);
 
 // Вставка плашек в map__pins
 var similarListElement = userDialog.querySelector('.map__pins');
@@ -50,6 +67,10 @@ function renderRented(renta) {
 
   pinElement.setAttribute('style', 'top:' + renta.location.y + 'px;' + 'left:' + renta.location.x + 'px;');
   pinElement.querySelector('img').src = renta.author.avatar;
+
+  pinElement.addEventListener('click', dialogOpenHandler);
+  pinElement.addEventListener('keypress', dialogOpenHandler);
+
   return pinElement;
 }
 
@@ -57,17 +78,6 @@ function renderRented(renta) {
 // Принимает объект
 function renderRentedDescription(renta) {
   var desElement = similarDescriptionTemplate.cloneNode(true);
-
-  // Указывает на юлок с классом popup__features
-  // var featuresElement = desElement.querySelector('.popup__features');
-
-  // Вырезает по значению номера индекса feature из шаблона
-  /*
-  for (var i = 0; i <= 6; i++) {
-    featuresElement.children[renta.offer.features[4]].className = 'pusto';
-    // console.log(renta.offer.features[i]);
-    // console.log(featuresElement.children[renta.offer.features[4]]);
-  }*/
 
   desElement.querySelector('h3').textContent = renta.offer.title;
   desElement.querySelector('small').textContent = renta.location.x + ' ' + renta.location.y;
@@ -95,7 +105,7 @@ function fillRented(Count) {
   var PHOTO = [];
 
   for (var i = 1; i <= Count; i++) {
-    RentaArr.push({
+    var newObject = {
       author: {
         avatar: 'img/avatars/user0' + i + '.png'
       },
@@ -116,7 +126,9 @@ function fillRented(Count) {
         x: randomNumber(300, 900),
         y: randomNumber(100, 500)
       }
-    });
+    };
+
+    RentaArr.push(newObject);
   }
 
   return RentaArr;
@@ -124,13 +136,101 @@ function fillRented(Count) {
 
 fillRented(RentaCount);
 
-// Цикл заполнения
-for (var i = 0; i < RentaArr.length; i++) {
-  fragment.appendChild(renderRented(RentaArr[i]));
+/*
+* Собитие на плашке
+* Отпустить нажатие мышки
+*
+*/
+pinStart.addEventListener('mouseup', function () {
+  userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
+  formElement.classList.remove('notice__form--disabled'); // Убрать затемнение с карты формы
+  fieldsetsToggle(formFieldsets);
+
+  // Цикл формирования разметки плашек
+  for (var i = 0; i < RentaArr.length; i++) {
+    fragment.appendChild(renderRented(RentaArr[i]));
+  }
+  // отрисовка плашек похожих объявлений
+  similarListElement.appendChild(fragment);
+
+}
+);
+
+/* ---------------------------------------------------------------------------
+* Делает конкретную метку на карте активной
+*
+* @param {HTMLElement} - элемент-метка
+*/
+function makePinActive(pin) {
+  pin.classList.add('pin--active');
 }
 
-fragmentDes.appendChild(renderRentedDescription(RentaArr[randomNumber(1, 7)]));
+/* ---------------------------------------------------------------------------
+* Делает все метки на карте неактивными
+*
+* @param {NodeList} - набор элементов-меток
+*/
+function makePinsInactive(pinsNodeList) {
+  [].forEach.call(pinsNodeList, function (pin) {
+    pin.classList.remove('pin--active');
+  });
+}
 
+/* ---------------------------------------------------------------------------
+* Устанавливает логику обработки события открытия окна
+*
+* @param {Object} - объект события
+*/
+function dialogCanOpen(event) {
+  return event.button === 0 || event.keyCode === 13;
+}
 
-similarListElement.appendChild(fragment);
-userDialog.insertBefore(fragmentDes, userDialog.children[0]);
+/* ---------------------------------------------------------------------------
+* Обработчик события открытия диалогового окна
+*
+* @param {Object} - объект события
+*/
+function dialogOpenHandler(event) {
+  var pin = event.currentTarget;
+  var adNumber = 0;
+  var allPins = pin.parentNode.querySelectorAll('.pin--active');
+  var activePinAlredy = userDialog.querySelector('.map__card');
+  var mapPinSelectorActive = document.querySelectorAll('.map__pin');
+
+  // удаляем старый элемент, если он не был закрыт вручную
+  if (activePinAlredy) {
+    userDialog.removeChild(userDialog.children[0]);
+  }
+
+  if (dialogCanOpen(event)) {
+    makePinsInactive(allPins);
+    makePinActive(pin);
+
+    // Ищем элемент на котором сработало событие
+    for (var i = 0; i <= RentaCount; i++) {
+      if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin pin--active') {
+        adNumber = i - 1;
+      }
+    }
+    // Вставка элемента в макет
+    fragmentDes.appendChild(renderRentedDescription(RentaArr[adNumber]));
+    userDialog.insertBefore(fragmentDes, userDialog.children[0]);
+    dialogClosePopup();
+  }
+}
+
+/* ---------------------------------------------------------------------------
+* Обработчик события закрытия окна попапа, при нажатии
+* на закрывающий элемент, либо с клавиатуры
+* @param ничего не принимает
+*/
+function dialogClosePopup() {
+  var popupElementFind = document.querySelector('.popup__close');
+
+  popupElementFind.addEventListener('click', function (event) {
+    if (event.button === 0 || event.keyCode === 13) {
+      userDialog.removeChild(userDialog.children[0]);
+    }
+  });
+}
+
