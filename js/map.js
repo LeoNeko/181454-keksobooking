@@ -162,7 +162,7 @@ pinStart.addEventListener('mouseup', function () {
 * @param {HTMLElement} - элемент-метка
 */
 function makePinActive(pin) {
-  pin.classList.add('pin--active');
+  pin.classList.add('map__pin--active');
 }
 
 /* ---------------------------------------------------------------------------
@@ -172,7 +172,7 @@ function makePinActive(pin) {
 */
 function makePinsInactive(pinsNodeList) {
   [].forEach.call(pinsNodeList, function (pin) {
-    pin.classList.remove('pin--active');
+    pin.classList.remove('map__pin--active');
   });
 }
 
@@ -193,7 +193,7 @@ function dialogCanOpen(event) {
 function dialogOpenHandler(event) {
   var pin = event.currentTarget;
   var adNumber = 0;
-  var allPins = pin.parentNode.querySelectorAll('.pin--active');
+  var allPins = pin.parentNode.querySelectorAll('.map__pin--active');
   var activePinAlredy = userDialog.querySelector('.map__card');
   var mapPinSelectorActive = document.querySelectorAll('.map__pin');
 
@@ -208,7 +208,7 @@ function dialogOpenHandler(event) {
 
     // Ищем элемент на котором сработало событие
     for (var i = 0; i <= RentaCount; i++) {
-      if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin pin--active') {
+      if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin map__pin--active') {
         adNumber = i - 1;
       }
     }
