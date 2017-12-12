@@ -368,6 +368,8 @@ typeRent.addEventListener('change', apartmentTypeHandler);
 
 var numberRooms = document.querySelector('#room_number');
 var numberGuests = document.querySelector('#capacity');
+// Установка значения по умолчанию
+numberGuests.options.selectedIndex = 2;
 
 function roomsChangesHandler(event) {
   var number = event.target.options.selectedIndex;
