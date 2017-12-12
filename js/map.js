@@ -350,6 +350,8 @@ var offerTypesPrices = {
 };
 
 var typeRent = document.querySelector('#type');
+// установка значения по умолчанию
+inputPrice.min = 1000;
 
 function apartmentTypeHandler(event) {
   inputPrice.min = offerTypesPrices[event.target.value];
