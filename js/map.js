@@ -269,7 +269,7 @@ inputAdress.addEventListener('input', function (evt) {
 *
 * Валидация поля Заголовка объявления
 */
-inputTittle.addEventListener('input', function (evt) {
+inputTittle.addEventListener('change', function (evt) {
   var target = evt.target;
   if (target.value.length < 30) {
     target.setCustomValidity('Имя должно состоять минимум из 30-х символов');
@@ -284,17 +284,38 @@ inputTittle.addEventListener('input', function (evt) {
 *
 * Валидация поля цены
 */
-inputPrice.addEventListener('input', function (evt) {
+inputPrice.addEventListener('change', function (evt) {
   var target = evt.target;
   if (target.value < 0) {
+    target.setAttribute('style', 'border: 2px solid red;');
     target.setCustomValidity('Сумма должна быть больше нуля');
   } else if (target.value > 1000000) {
+    target.setAttribute('style', 'border: 2px solid red;');
     target.setCustomValidity('Да вы прифегели батюшка!');
   } else {
     target.setCustomValidity('');
   }
 });
 
+/* ----------------------------------------------------------------------------
+*
+* Проверка валидации перед отправкой данных на сервер
+*
+*/
+
+var sendFormHandler = formElement.querySelector('.form__submit');
+
+sendFormHandler.addEventListener('click', function () {
+  var allInputs = formElement.querySelectorAll('input');
+
+  for (var i = 0; i < allInputs.length; i++) {
+    if (!allInputs[i].validity.valid) {
+      allInputs[i].setAttribute('style', 'border: 2px solid red;');
+    } else {
+      allInputs[i].removeAttribute('style');
+    }
+  }
+});
 
 /* -----------------------------------------------------------------------------
 *
