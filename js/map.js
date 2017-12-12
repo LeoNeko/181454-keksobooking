@@ -234,3 +234,129 @@ function dialogClosePopup() {
   });
 }
 
+
+/* ---------------------------------------------------------------------
+*
+* ВАЛИДАЦИЯ ФОРМЫ
+*
+*/
+
+// Поле адресс
+var inputAdress = formElement.querySelector('#address');
+inputAdress.setAttribute('readonly', 'readonly');
+inputAdress.setAttribute('required', 'required');
+
+inputAdress.value = 'Здесь должен быть адресс';
+
+// Поле названия
+var inputTittle = formElement.querySelector('#title');
+inputTittle.setAttribute('required', 'required');
+
+// Поле цены
+var inputPrice = formElement.querySelector('#price');
+inputPrice.setAttribute('placeholder', '1000');
+
+/* ---------------------------------------------------------------------------
+*
+* Валидация поля адресса
+*/
+
+inputAdress.addEventListener('input', function (evt) {
+  var target = evt.target;
+});
+
+/* ---------------------------------------------------------------------------
+*
+* Валидация поля адресса
+*/
+inputTittle.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (target.value.length > 30) {
+    target.setCustomValidity('Имя должно состоять максимум из 30-х символов');
+  } else {
+    target.setCustomValidity('');
+  }
+});
+
+/* ---------------------------------------------------------------------------
+*
+* Валидация поля цены
+*/
+inputPrice.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value < 0) {
+    target.setCustomValidity('Сумма должна быть больше нуля');
+  } else if (target.value > 1000000) {
+    target.setCustomValidity('Да вы прифегели батюшка!');
+  } else {
+    target.setCustomValidity('');
+  }
+});
+
+
+/* -----------------------------------------------------------------------------
+*
+* Согласование времени заезда и выезда
+*
+*/
+var timein = formElement.querySelector('#timein');
+var timeout = formElement.querySelector('#timeout');
+
+function timeHandler(event) {
+  if (event.target === timein) {
+    timeout.value = event.target.value;
+  } else {
+    timein.value = event.target.value;
+  }
+}
+
+timein.addEventListener('change', timeHandler);
+timeout.addEventListener('change', timeHandler);
+
+/* --------------------------------------------------------------------------
+*
+* Синхронизация типа жилья с минимальной ценой
+*
+*
+*/
+var offerTypesPrices = {
+  'bungalo': 0,
+  'flat': 1000,
+  'house': 5000,
+  'palace': 10000
+};
+
+var typeRent = document.querySelector('#type');
+
+function apartmentTypeHandler(event) {
+  inputPrice.min = offerTypesPrices[event.target.value];
+}
+
+
+typeRent.addEventListener('change', apartmentTypeHandler);
+
+/* --------------------------------------------------------------------------
+*
+* Синхронизация количество комнат и количество гостей
+*
+*/
+
+var numberRooms = document.querySelector('#room_number');
+var numberGuests = document.querySelector('#capacity');
+
+function roomsChangesHandler(event) {
+  var number = event.target.options.selectedIndex;
+  if (number === 0) {
+    numberGuests.options.selectedIndex = 2;
+  } else if (number === 1) {
+    numberGuests.options.selectedIndex = 1;
+  } else if (number === 2) {
+    numberGuests.options.selectedIndex = 0;
+  } else {
+    numberGuests.options.selectedIndex = 3;
+  }
+}
+
+numberRooms.addEventListener('change', roomsChangesHandler);
