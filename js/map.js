@@ -267,14 +267,14 @@ inputAdress.addEventListener('input', function (evt) {
 
 /* ---------------------------------------------------------------------------
 *
-* Валидация поля адресса
+* Валидация поля Заголовка объявления
 */
 inputTittle.addEventListener('input', function (evt) {
   var target = evt.target;
-  if (target.value.length < 2) {
-    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (target.value.length > 30) {
-    target.setCustomValidity('Имя должно состоять максимум из 30-х символов');
+  if (target.value.length < 30) {
+    target.setCustomValidity('Имя должно состоять минимум из 30-х символов');
+  } else if (target.value.length > 100) {
+    target.setCustomValidity('Имя должно состоять максимум из 100-х символов');
   } else {
     target.setCustomValidity('');
   }
