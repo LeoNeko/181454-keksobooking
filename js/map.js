@@ -372,7 +372,7 @@ var numberRooms = document.querySelector('#room_number');
 var numberGuests = document.querySelector('#capacity');
 // Установка значения по умолчанию
 numberGuests.options.selectedIndex = 2;
-
+disabledOptionsGuests(0, numberGuests.options);
 
 function disabledOptionsGuests(value, arr) {
   for (var i = 0; i < arr.length; i++){
