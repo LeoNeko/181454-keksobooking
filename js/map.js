@@ -224,6 +224,7 @@ function dialogOpenHandler(event) {
 * на закрывающий элемент, либо с клавиатуры
 * @param ничего не принимает
 */
+
 function dialogClosePopup() {
   var popupElementFind = document.querySelector('.popup__close');
   var allPins = document.querySelectorAll('.map__pin');
@@ -234,6 +235,16 @@ function dialogClosePopup() {
     }
     makePinsInactive(allPins);
   });
+
+  function keydownEscClosePopup(event) {
+    if (event.keyCode === 27) {
+      userDialog.removeChild(userDialog.children[0]);
+      makePinsInactive(allPins);
+      userDialog.removeEventListener('keydown', keydownEscClosePopup);
+    }
+  }
+
+  userDialog.addEventListener('keydown', keydownEscClosePopup);
 }
 
 
