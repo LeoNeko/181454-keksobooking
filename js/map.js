@@ -226,11 +226,13 @@ function dialogOpenHandler(event) {
 */
 function dialogClosePopup() {
   var popupElementFind = document.querySelector('.popup__close');
+  var allPins = document.querySelectorAll('.map__pin');
 
   popupElementFind.addEventListener('click', function (event) {
     if (event.button === 0 || event.keyCode === 13) {
       userDialog.removeChild(userDialog.children[0]);
     }
+    makePinsInactive(allPins);
   });
 }
 
@@ -371,16 +373,47 @@ var numberGuests = document.querySelector('#capacity');
 // Установка значения по умолчанию
 numberGuests.options.selectedIndex = 2;
 
+
+function disabledOptionsGuests(value, arr) {
+  for (var i = 0; i < arr.length; i++){
+    if (value === 0) {
+      arr[0].disabled = 'disabled';
+      arr[1].disabled = 'disabled';
+      arr[2].disabled = '';
+      arr[3].disabled = 'disabled';
+    } else if (value === 1) {
+      arr[0].disabled = 'disabled';
+      arr[1].disabled = '';
+      arr[2].disabled = '';
+      arr[3].disabled = 'disabled';
+    } else if (value === 2) {
+      arr[0].disabled = '';
+      arr[1].disabled = '';
+      arr[2].disabled = '';
+      arr[3].disabled = 'disabled';
+    } else {
+      arr[0].disabled = 'disabled';
+      arr[1].disabled = 'disabled';
+      arr[2].disabled = 'disabled';
+      arr[3].disabled = '';
+    }
+  }
+}
+
 function roomsChangesHandler(event) {
   var number = event.target.options.selectedIndex;
   if (number === 0) {
     numberGuests.options.selectedIndex = 2;
+    disabledOptionsGuests(number, numberGuests.options);
   } else if (number === 1) {
     numberGuests.options.selectedIndex = 1;
+    disabledOptionsGuests(number, numberGuests.options);
   } else if (number === 2) {
     numberGuests.options.selectedIndex = 0;
+    disabledOptionsGuests(number, numberGuests.options);
   } else {
     numberGuests.options.selectedIndex = 3;
+    disabledOptionsGuests(number, numberGuests.options);
   }
 }
 
