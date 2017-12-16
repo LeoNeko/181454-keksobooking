@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var RentaCount = 8;
+  var rentaCount = 8;
   var userDialog = document.querySelector('.map');
 
   var fragmentDes = document.createDocumentFragment();
@@ -20,7 +20,7 @@
   *
   * @param {Object} - объект события
   */
-  function dialogOpenHandler(event, RentaArr) {
+  function dialogOpenHandler(event, rentaArr) {
     var pin = event.currentTarget;
     var adNumber = 0;
     var allPins = pin.parentNode.querySelectorAll('.map__pin--active');
@@ -37,13 +37,13 @@
       window.makePinActive(pin);
 
       // Ищем элемент на котором сработало событие
-      for (var i = 0; i <= RentaCount; i++) {
+      for (var i = 0; i <= rentaCount; i++) {
         if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin map__pin--active') {
           adNumber = i - 1;
         }
       }
       // Вставка элемента в макет
-      fragmentDes.appendChild(window.renderRentedDescription(RentaArr[adNumber]));
+      fragmentDes.appendChild(window.renderRentedDescription(rentaArr[adNumber]));
       userDialog.insertBefore(fragmentDes, userDialog.children[0]);
       dialogClosePopup();
     }
@@ -61,21 +61,38 @@
     var popupElementFind = document.querySelector('.popup__close');
     var allPins = document.querySelectorAll('.map__pin');
 
-    popupElementFind.addEventListener('click', function (event) {
-      if (event.button === 0 || event.keyCode === 13) {
-        userDialog.removeChild(userDialog.children[0]);
-      }
-      window.makePinsInactive(allPins);
+    popupElementFind.addEventListener('click', function (evt) {
+      keydownClickClosePopup(evt, allPins);
     });
 
-    function keydownEscClosePopup(event) {
-      if (event.keyCode === 27) {
-        userDialog.removeChild(userDialog.children[0]);
-        window.makePinsInactive(allPins);
-        userDialog.removeEventListener('keydown', keydownEscClosePopup);
-      }
-    }
+    userDialog.addEventListener('keydown', function (evt) {
+      keydownEscClosePopup(evt, allPins);
+    });
+  }
 
-    userDialog.addEventListener('keydown', keydownEscClosePopup);
+  /* -------------------------------------------------------------------------
+  *
+  * Отлавливает закрытие на клип по элементу закрытия
+  *
+  */
+  function keydownClickClosePopup(event, allPins) {
+    var popup = userDialog.querySelector('.popup');
+    if (event.button === 0 || event.keyCode === 13) {
+      userDialog.removeChild(popup);
+    }
+    window.makePinsInactive(allPins);
+  }
+
+  /* --------------------------------------------------------------------------
+  * Отлавливает закрытие на ESC
+  *
+  */
+  function keydownEscClosePopup(event, allPins) {
+    if (event.keyCode === 27) {
+      var popup = userDialog.querySelector('.popup');
+      console.log(popup);
+      userDialog.removeChild(popup);
+      window.makePinsInactive(allPins);
+    }
   }
 })();

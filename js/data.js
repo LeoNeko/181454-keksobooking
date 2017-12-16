@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var RentaArr = [];
+  var rentaArr = [];
   // var userDialog = document.querySelector('.map');
   /* ---------------------------------------------------------
   *  Принимает массив полей формы
@@ -123,9 +123,9 @@
         }
       };
 
-      RentaArr.push(newObject);
+      rentaArr.push(newObject);
     }
 
-    return RentaArr;
+    return rentaArr;
   };
 })();

@@ -168,18 +168,22 @@
 
   function roomsChangesHandler(event) {
     var number = event.target.options.selectedIndex;
-    if (number === 0) {
-      numberGuests.options.selectedIndex = 2;
-      disabledOptionsGuests(number, numberGuests.options);
-    } else if (number === 1) {
-      numberGuests.options.selectedIndex = 1;
-      disabledOptionsGuests(number, numberGuests.options);
-    } else if (number === 2) {
-      numberGuests.options.selectedIndex = 0;
-      disabledOptionsGuests(number, numberGuests.options);
-    } else {
-      numberGuests.options.selectedIndex = 3;
-      disabledOptionsGuests(number, numberGuests.options);
+    switch (number) {
+      case 0:
+        numberGuests.options.selectedIndex = 2;
+        disabledOptionsGuests(number, numberGuests.options);
+        break;
+      case 1:
+        numberGuests.options.selectedIndex = 1;
+        disabledOptionsGuests(number, numberGuests.options);
+        break;
+      case 2:
+        numberGuests.options.selectedIndex = 0;
+        disabledOptionsGuests(number, numberGuests.options);
+        break;
+      case 3:
+        numberGuests.options.selectedIndex = 3;
+        disabledOptionsGuests(number, numberGuests.options);
     }
   }
 

@@ -1,9 +1,9 @@
 'use strict';
 
 // Число сдаваемых аппартаментов
-var RentaCount = 8;
+var rentaCount = 8;
 // Пустой массив для заполнения сдаваемых аппартаментов
-var RentaArr = [];
+var rentaArr = [];
 
 // Показывает скрытый блок карты
 var userDialog = document.querySelector('.map');
@@ -25,7 +25,7 @@ window.fieldsetsToggle(formFieldsets);
 */
 
 //
-RentaArr = window.fillRented(RentaCount);
+rentaArr = window.fillRented(rentaCount);
 
 pinStart.addEventListener('mouseup', function () {
   userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
@@ -33,8 +33,8 @@ pinStart.addEventListener('mouseup', function () {
   window.fieldsetsToggle(formFieldsets);
 
   // Цикл формирования разметки плашек
-  for (var i = 0; i < RentaArr.length; i++) {
-    fragment.appendChild(window.renderRented(RentaArr[i], RentaArr));
+  for (var i = 0; i < rentaArr.length; i++) {
+    fragment.appendChild(window.renderRented(rentaArr[i], rentaArr));
   }
   // отрисовка плашек похожих объявлений
   similarListElement.appendChild(fragment);
