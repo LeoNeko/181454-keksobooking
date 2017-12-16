@@ -28,7 +28,6 @@
   *
   * Валидация поля адресса
   */
-
   inputAdress.addEventListener('input', function (evt) {
     var target = evt.target;
   });
@@ -142,26 +141,31 @@
 
   function disabledOptionsGuests(value, arr) {
     for (var i = 0; i < arr.length; i++) {
-      if (value === 0) {
-        arr[0].disabled = 'disabled';
-        arr[1].disabled = 'disabled';
-        arr[2].disabled = '';
-        arr[3].disabled = 'disabled';
-      } else if (value === 1) {
-        arr[0].disabled = 'disabled';
-        arr[1].disabled = '';
-        arr[2].disabled = '';
-        arr[3].disabled = 'disabled';
-      } else if (value === 2) {
-        arr[0].disabled = '';
-        arr[1].disabled = '';
-        arr[2].disabled = '';
-        arr[3].disabled = 'disabled';
-      } else {
-        arr[0].disabled = 'disabled';
-        arr[1].disabled = 'disabled';
-        arr[2].disabled = 'disabled';
-        arr[3].disabled = '';
+      switch (value) {
+        case 0:
+          arr[0].disabled = 'disabled';
+          arr[1].disabled = 'disabled';
+          arr[2].disabled = '';
+          arr[3].disabled = 'disabled';
+          break;
+        case 1:
+          arr[0].disabled = 'disabled';
+          arr[1].disabled = '';
+          arr[2].disabled = '';
+          arr[3].disabled = 'disabled';
+          break;
+        case 2:
+          arr[0].disabled = '';
+          arr[1].disabled = '';
+          arr[2].disabled = '';
+          arr[3].disabled = 'disabled';
+          break;
+        case 3:
+          arr[0].disabled = 'disabled';
+          arr[1].disabled = 'disabled';
+          arr[2].disabled = 'disabled';
+          arr[3].disabled = '';
+          break;
       }
     }
   }
@@ -170,21 +174,22 @@
     var number = event.target.options.selectedIndex;
     switch (number) {
       case 0:
-        numberGuests.options.selectedIndex = 2;
-        disabledOptionsGuests(number, numberGuests.options);
+        caseOptions(2, number);
         break;
       case 1:
-        numberGuests.options.selectedIndex = 1;
-        disabledOptionsGuests(number, numberGuests.options);
+        caseOptions(1, number);
         break;
       case 2:
-        numberGuests.options.selectedIndex = 0;
-        disabledOptionsGuests(number, numberGuests.options);
+        caseOptions(0, number);
         break;
       case 3:
-        numberGuests.options.selectedIndex = 3;
-        disabledOptionsGuests(number, numberGuests.options);
+        caseOptions(3, number);
     }
+  }
+
+  function caseOptions(value, number) {
+    numberGuests.options.selectedIndex = value;
+    disabledOptionsGuests(number, numberGuests.options);
   }
 
   numberRooms.addEventListener('change', roomsChangesHandler);
