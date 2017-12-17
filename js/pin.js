@@ -34,7 +34,7 @@
 
   pinMainHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-  /* Перетаскиваемая метка становится выше других меток */
+    /* Перетаскиваемая метка становится выше других меток */
     pinMainElement.style.zIndex = '999';
 
     var startCoords = {
@@ -66,9 +66,6 @@
       pinMainElement.style.top = (pinMainElement.offsetTop - shift.y) + 'px';
       pinMainElement.style.left = (pinMainElement.offsetLeft - shift.x) + 'px';
 
-      console.log(pinMainElement.style.top);
-      console.log(pinMainElement.style.left);
-
       if (pinMainElement.offsetTop - shift.y < borderCoords.y1) {
         pinMainElement.style.top = borderCoords.y1 + 'px';
       } else if (pinMainElement.offsetTop - shift.y > borderCoords.y2) {
@@ -79,7 +76,7 @@
         pinMainElement.style.left = borderCoords.x2 + 'px';
       }
       window.fillAdressInput(pinMainElement.style.top, pinMainElement.style.left);
-    };
+    }
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();

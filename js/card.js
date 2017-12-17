@@ -90,7 +90,6 @@
   function keydownEscClosePopup(event, allPins) {
     if (event.keyCode === 27) {
       var popup = userDialog.querySelector('.popup');
-      console.log(popup);
       userDialog.removeChild(popup);
       window.makePinsInactive(allPins);
     }
