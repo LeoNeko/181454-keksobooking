@@ -26,12 +26,15 @@
 
   /* ---------------------------------------------------------------------------
   *
-  * Валидация поля адресса
+  * Заполнение поля адреса
+  * @param {object} - объект с координатами главног опина
   */
-  inputAdress.addEventListener('input', function (evt) {
-    var target = evt.target;
-  });
+  function fillAdressInput(x, y) {
+    var elementAdress = formElement.querySelector('#address');
+    elementAdress.value = 'x: ' + x + ', y: ' + y;
+  }
 
+  window.fillAdressInput = fillAdressInput;
   /* ---------------------------------------------------------------------------
   *
   * Валидация поля Заголовка объявления
