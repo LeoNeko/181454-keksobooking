@@ -56,7 +56,7 @@
   */
   inputPrice.addEventListener('change', function (evt) {
     var target = evt.target;
-    if (target.value < 0) {
+    if (target.value < 0 || target.value === '') {
       target.setAttribute('style', 'border: 2px solid red;');
       target.setCustomValidity('Сумма должна быть больше нуля');
     } else if (target.value > 1000000) {
@@ -79,7 +79,7 @@
     var allInputs = formElement.querySelectorAll('input');
 
     for (var i = 0; i < allInputs.length; i++) {
-      if (!allInputs[i].validity.valid) {
+      if (!allInputs[i].validity.valid || !allInputs[i].validity.valueMissing) {
         allInputs[i].setAttribute('style', 'border: 2px solid red;');
       } else {
         allInputs[i].removeAttribute('style');
