@@ -95,16 +95,19 @@
   var timein = formElement.querySelector('#timein');
   var timeout = formElement.querySelector('#timeout');
 
-  function timeHandler(event) {
-    if (event.target === timein) {
-      timeout.value = event.target.value;
-    } else {
-      timein.value = event.target.value;
-    }
+  var offerTypesTime = ['12:00', '13:00', '14:00'];
+
+  function syncValuesTime(element, value) {
+    element.value = value;
   }
 
-  timein.addEventListener('change', timeHandler);
-  timeout.addEventListener('change', timeHandler);
+  timein.addEventListener('change', function () {
+    window.synchronizeFields(timein, timeout, offerTypesTime, offerTypesTime, syncValuesTime);
+  });
+
+  timeout.addEventListener('change', function () {
+    window.synchronizeFields(timeout, timein, offerTypesTime, offerTypesTime, syncValuesTime);
+  });
 
   /* --------------------------------------------------------------------------
   *
@@ -140,30 +143,30 @@
   var numberGuests = document.querySelector('#capacity');
   // Установка значения по умолчанию
   numberGuests.options.selectedIndex = 2;
-  disabledOptionsGuests(0, numberGuests.options);
+  disabledOptionsGuests(numberGuests.options, '1');
 
-  function disabledOptionsGuests(value, arr) {
+  function disabledOptionsGuests(arr, value) {
     for (var i = 0; i < arr.length; i++) {
       switch (value) {
-        case 0:
+        case '1':
           arr[0].disabled = 'disabled';
           arr[1].disabled = 'disabled';
           arr[2].disabled = '';
           arr[3].disabled = 'disabled';
           break;
-        case 1:
+        case '2':
           arr[0].disabled = 'disabled';
           arr[1].disabled = '';
           arr[2].disabled = '';
           arr[3].disabled = 'disabled';
           break;
-        case 2:
+        case '3':
           arr[0].disabled = '';
           arr[1].disabled = '';
           arr[2].disabled = '';
           arr[3].disabled = 'disabled';
           break;
-        case 3:
+        case '100':
           arr[0].disabled = 'disabled';
           arr[1].disabled = 'disabled';
           arr[2].disabled = 'disabled';
@@ -173,28 +176,9 @@
     }
   }
 
-  function roomsChangesHandler(event) {
-    var number = event.target.options.selectedIndex;
-    switch (number) {
-      case 0:
-        caseOptions(2, number);
-        break;
-      case 1:
-        caseOptions(1, number);
-        break;
-      case 2:
-        caseOptions(0, number);
-        break;
-      case 3:
-        caseOptions(3, number);
-    }
-  }
+  var setNumberRooms = ['1', '2', '3', '100'];
 
-  function caseOptions(value, number) {
-    numberGuests.options.selectedIndex = value;
-    disabledOptionsGuests(number, numberGuests.options);
-  }
-
-  numberRooms.addEventListener('change', roomsChangesHandler);
-
+  numberRooms.addEventListener('change', function () {
+    window.synchronizeFields(numberRooms, numberGuests.options, setNumberRooms, setNumberRooms, disabledOptionsGuests);
+  });
 })();
