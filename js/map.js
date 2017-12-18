@@ -27,7 +27,7 @@ window.fieldsetsToggle(formFieldsets);
 //
 rentaArr = window.fillRented(rentaCount);
 
-pinStart.addEventListener('mouseup', function () {
+function activeSitePageHandle() {
   userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
   formElement.classList.remove('notice__form--disabled'); // Убрать затемнение с карты формы
   window.fieldsetsToggle(formFieldsets);
@@ -39,6 +39,9 @@ pinStart.addEventListener('mouseup', function () {
   // отрисовка плашек похожих объявлений
   similarListElement.appendChild(fragment);
 
+  pinStart.removeEventListener('mouseup', activeSitePageHandle);
 }
-);
+
+
+pinStart.addEventListener('mouseup', activeSitePageHandle);
 
