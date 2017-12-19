@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var rentaCount = 8;
   var userDialog = document.querySelector('.map');
 
   var fragmentDes = document.createDocumentFragment();
@@ -37,11 +36,13 @@
       window.makePinActive(pin);
 
       // Ищем элемент на котором сработало событие
-      for (var i = 0; i <= rentaCount; i++) {
+      for (var i = 0; i <= rentaArr.length; i++) {
+
         if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin map__pin--active') {
           adNumber = i - 1;
         }
       }
+      // console.log(rentaArr[adNumber]);
       // Вставка элемента в макет
       fragmentDes.appendChild(window.renderRentedDescription(rentaArr[adNumber]));
       userDialog.insertBefore(fragmentDes, userDialog.children[0]);
