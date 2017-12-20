@@ -55,7 +55,6 @@ pinStart.addEventListener('mouseup', activeSitePageHandle);
 form.addEventListener('submit', function (evt) {
   evt.preventDefault();
   window.backend.save(new FormData(form), function () {
-    //console.log(new FormData(form));
     userDialog.classList.add('hidden');
   }, window.backend.errorHandler);
   form.reset();
