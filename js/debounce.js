@@ -1,5 +1,3 @@
-/* Disabled bounce effect */
-
 'use strict';
 
 (function () {
