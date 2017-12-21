@@ -21,8 +21,6 @@
     });
 
     xhr.timeout = 10000;
-
-    return xhr;
   };
 
   var backend = {
@@ -38,7 +36,7 @@
           var fragment = document.createDocumentFragment();
 
           // Цикл формирования разметки плашек
-          for (var i = 0; i < xhr.response.length; i++) {
+          for (var i = 0; i < 5; i++) {
             fragment.appendChild(window.renderRented(xhr.response[i], xhr.response));
           }
 
@@ -47,6 +45,7 @@
         } else {
           onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
         }
+        window.xhr = xhr.response;
       });
 
       xhr.addEventListener('error', function () {

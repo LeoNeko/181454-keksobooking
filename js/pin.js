@@ -30,11 +30,9 @@
   * @param no
   */
   var pinMainElement = document.querySelector('.map__pin--main');
-  var pinMainHandle = pinMainElement.querySelector('img');
 
-  pinMainHandle.addEventListener('mousedown', function (evt) {
+  pinMainElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-    /* Перетаскиваемая метка становится выше других меток */
     pinMainElement.style.zIndex = '999';
 
     var startCoords = {

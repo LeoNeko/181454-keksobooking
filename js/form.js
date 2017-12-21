@@ -31,7 +31,7 @@
   */
   function fillAdressInput(x, y) {
     var elementAdress = formElement.querySelector('#address');
-    elementAdress.value = 'x: ' + x + ', y: ' + y;
+    elementAdress.value = 'y: ' + x + ', x: ' + y;
   }
 
   window.fillAdressInput = fillAdressInput;
