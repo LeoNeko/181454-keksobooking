@@ -63,7 +63,6 @@
     },
     save: function (data, onSuccess, onError) {
       var xhr = setup(onSuccess, onError);
-
       xhr.open('POST', 'https://1510.dump.academy/keksobooking');
       xhr.send(data);
     },
