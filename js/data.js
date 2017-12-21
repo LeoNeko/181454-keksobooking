@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  // var rentaArr = [];
-  // var userDialog = document.querySelector('.map');
   /* ---------------------------------------------------------
   *  Принимает массив полей формы
   *
@@ -21,35 +19,11 @@
   var similarPinTemplate = document.querySelector('template').content.querySelector('.map__pin');
   var similarDescriptionTemplate = document.querySelector('template').content.querySelector('.map__card');
 
-  // Функция вывода случайного индекса массива.
-  // Принимает длинну массива
   /*
-  function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-*/
-  // Функция заполнения поля features
-  // Принимает длиннц массива и сам массив
-  // Возращает массив индексов
-  /*
-  function randomFeatures(lenght, arr) {
-    var lines = arr.slice();
-    // var randomIndex = randomNumber(0, lenght);
-    var tresh = [];
-    var dumb = randomNumber(0, lenght);
-    var counter = dumb;
-
-    for (var i = 0; i <= dumb - 1; i++) {
-      tresh.push(lines.indexOf(lines[randomNumber(0, counter)]));
-      // lines.indexOf(lines.splice(counter, 1));
-      // console.log(lines.splice(randomNumber(0, randomIndex), 1));
-      counter--;
-    }
-
-    return tresh;
-  }
-*/
-
+  *
+  * Формирует список фьючерсов для объявления
+  * Принимаем массив ключей фьючерсов
+  */
   function fuateresParser(arr) {
     var dumbArr = '';
     for (var i = 0; i < arr.length; i++) {
@@ -62,7 +36,7 @@
   // Принимает объект
   function renderRented(renta, arr) {
     var pinElement = similarPinTemplate.cloneNode(true);
-
+    //console.log(arr);
     pinElement.setAttribute('style', 'top:' + renta.location.y + 'px;' + 'left:' + renta.location.x + 'px;');
     pinElement.querySelector('img').src = renta.author.avatar;
 
@@ -96,4 +70,40 @@
   }
 
   window.renderRentedDescription = renderRentedDescription;
+
+
+  /*
+  *
+  * Отрисовка пинов при фильтрации
+  * {}
+  *
+  */
+  function renderFilterApply(arrBools) {
+    var unCgangeArr = window.xhr;
+    var similarListElement = document.querySelector('.map__pins');
+    var activePins = similarListElement.querySelectorAll('.map__pin');
+    var fragment = document.createDocumentFragment();
+    var nameLengths = unCgangeArr.reduce(function (accumulator, currentValue, index) {
+      if (arrBools[index] === true) {
+        accumulator.push(currentValue);
+      }
+      return accumulator;
+    }, []);
+    console.log(nameLengths);
+    for (var i = 0; i < nameLengths.length; i++) {
+      if (i > 5) {
+        break;
+      }
+      fragment.appendChild(window.renderRented(nameLengths[i], unCgangeArr));
+    }
+
+    for (var j = 0; j < activePins.length; j++) {
+      if (j !== 0) {
+        similarListElement.removeChild(activePins[j]);
+      }
+    }
+    similarListElement.appendChild(fragment);
+  }
+
+  window.renderFilterApply = renderFilterApply;
 })();
