@@ -21,8 +21,6 @@
     });
 
     xhr.timeout = 10000;
-
-    // return xhr;
   };
 
   var backend = {
@@ -62,7 +60,6 @@
 
       xhr.open('GET', 'https://1510.dump.academy/keksobooking/data');
       xhr.send();
-      // return xhr.response;
     },
     save: function (data, onSuccess, onError) {
       var xhr = setup(onSuccess, onError);

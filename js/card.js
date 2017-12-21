@@ -25,7 +25,7 @@
     var allPins = pin.parentNode.querySelectorAll('.map__pin--active');
     var activePinAlredy = userDialog.querySelector('.map__card');
     var mapPinSelectorActive = document.querySelectorAll('.map__pin');
-    // console.log(rentaArr.length);
+
     // удаляем старый элемент, если он не был закрыт вручную
     if (activePinAlredy) {
       userDialog.removeChild(userDialog.children[0]);
@@ -36,13 +36,13 @@
       window.makePinActive(pin);
 
       // Ищем элемент на котором сработало событие
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i <= 5; i++) {
         if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin map__pin--active') {
           adNumber = i - 1;
-          console.log(adNumber);
+          break;
         }
       }
-      // console.log(rentaArr[adNumber]);
+
       // Вставка элемента в макет
       fragmentDes.appendChild(window.renderRentedDescription(rentaArr[adNumber]));
       userDialog.insertBefore(fragmentDes, userDialog.children[0]);

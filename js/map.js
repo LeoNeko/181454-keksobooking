@@ -5,7 +5,7 @@ var userDialog = document.querySelector('.map');
 
 var pinStart = document.querySelector('.map__pin--main');
 var formElement = document.querySelector('.notice__form');
-var formFieldsets = document.getElementsByClassName('form__element');
+var formFieldsets = document.querySelector('.form__element');
 var form = document.querySelector('.notice__form');
 window.fieldsetsToggle(formFieldsets);
 
@@ -14,25 +14,14 @@ window.fieldsetsToggle(formFieldsets);
 * Отпустить нажатие мышки
 *
 */
-var onError = function (message) {
-  console.error(message);
-};
-
-var onSuccess = function (data) {
-  console.log(data);
-};
-
 function activeSitePageHandle() {
   userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
   formElement.classList.remove('notice__form--disabled'); // Убрать затемнение с карты формы
   var filterPanel = document.querySelector('.map__filters');
   window.fieldsetsToggle(formFieldsets);
 
-  // отрисовка плашек похожих объявлений
-  // similarListElement.appendChild(fragment);
-
   // Загрузка данных с сервера
-  window.backend.load(onSuccess, onError);
+  window.backend.load(window.backend.errorHandler, window.backend.errorHandler);
 
   pinStart.removeEventListener('mouseup', activeSitePageHandle);
 

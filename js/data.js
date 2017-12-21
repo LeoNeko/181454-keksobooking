@@ -36,7 +36,7 @@
   // Принимает объект
   function renderRented(renta, arr) {
     var pinElement = similarPinTemplate.cloneNode(true);
-    //console.log(arr);
+
     pinElement.setAttribute('style', 'top:' + renta.location.y + 'px;' + 'left:' + renta.location.x + 'px;');
     pinElement.querySelector('img').src = renta.author.avatar;
 
@@ -75,7 +75,7 @@
   /*
   *
   * Отрисовка пинов при фильтрации
-  * {}
+  * {arr} - массив булевых значений
   *
   */
   function renderFilterApply(arrBools) {
@@ -89,12 +89,12 @@
       }
       return accumulator;
     }, []);
-    console.log(nameLengths);
+
     for (var i = 0; i < nameLengths.length; i++) {
       if (i > 5) {
         break;
       }
-      fragment.appendChild(window.renderRented(nameLengths[i], unCgangeArr));
+      fragment.appendChild(window.renderRented(nameLengths[i], nameLengths));
     }
 
     for (var j = 0; j < activePins.length; j++) {
