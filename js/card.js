@@ -91,8 +91,10 @@
   function keydownEscClosePopup(event, allPins) {
     if (event.keyCode === 27) {
       var popup = userDialog.querySelector('.popup');
-      userDialog.removeChild(popup);
-      window.makePinsInactive(allPins);
+      if(popup){
+        userDialog.removeChild(popup);
+        window.makePinsInactive(allPins);
+      }
     }
   }
 })();

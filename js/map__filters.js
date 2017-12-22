@@ -1,14 +1,11 @@
 'use strict';
 
 (function () {
-  function filterProcess(selects, checkboxes) {
-    var filterResult = [];
-    var adList = window.xhr;
-    // console.log(adList);
+
     function isOff(feature) {
       return feature === false;
     }
-    // console.log(selects, checkboxes);
+
     function priceToString(price) {
       switch (true) {
         case price < 10000:
@@ -20,10 +17,14 @@
       }
     }
 
+  function filterProcess(selects, checkboxes) {
+    var filterResult = [];
+    var adList = window.xhr;
+
     adList.forEach(function (ad) {
       var allOptionsIsAny = Object.keys(selects).length === 0;
       var allCheckboxesUncheked = checkboxes.every(isOff);
-      // console.log(allCheckboxesUncheked, allOptionsIsAny);
+
       if (allOptionsIsAny && allCheckboxesUncheked) {
         filterResult.push(true);
       } else {
@@ -80,7 +81,6 @@
     var filters = filterProcess(selectsValues, checkboxesValues);
 
     window.debounce(function () {
-      // window.pin.applyFilter(filters);
       window.renderFilterApply(filters);
     });
   }
