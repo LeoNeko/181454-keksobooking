@@ -1,10 +1,10 @@
 'use strict';
-
 (function () {
   // Показывает скрытый блок карты
   var userDialog = document.querySelector('.map');
 
   var pinStart = document.querySelector('.map__pin--main');
+  window.pinStart = pinStart;
   var formElement = document.querySelector('.notice__form');
   var formFieldsets = document.querySelector('.form__element');
   var form = document.querySelector('.notice__form');
@@ -21,7 +21,7 @@
     userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
     formElement.classList.remove('notice__form--disabled'); // Убрать затемнение с карты формы
     window.fieldsetsToggle(formFieldsets);
-
+    window.setStandartParams();
     // Загрузка данных с сервера
     window.backend.load(window.backend.errorHandler, window.backend.errorHandler);
 
@@ -41,7 +41,7 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.backend.save(new FormData(form), function () {
-      userDialog.classList.add('hidden');
+      setStandartParams();
     }, window.backend.errorHandler);
     form.reset();
   });
