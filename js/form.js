@@ -14,7 +14,7 @@
   var numberRooms = document.querySelector('#room_number');
   var numberGuests = document.querySelector('#capacity');
 
-  function setStandartParams(){
+  function setStandartParams() {
     // Установка значения по умолчанию
     numberGuests.options.selectedIndex = 2;
     disabledOptionsGuests(numberGuests.options, '1');
