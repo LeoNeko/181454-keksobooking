@@ -23,6 +23,7 @@
   // Поле цены
   var inputPrice = formElement.querySelector('#price');
   inputPrice.setAttribute('placeholder', '1000');
+  inputPrice.value = 1000;
 
   /* ---------------------------------------------------------------------------
   *
