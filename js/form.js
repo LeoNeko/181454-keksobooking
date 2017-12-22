@@ -24,10 +24,8 @@
     inputAdress.setAttribute('required', 'required');
 
     fillAdressInput('375px', '600px');
-    console.log(window.pinStart);
-    console.log(window.pinStart.style.top, window.pinStart.style.left);
-    // Поле названия по умолчанию
 
+    // Поле названия по умолчанию
     inputTittle.setAttribute('required', 'required');
 
     // Поле цены по умолчанию
