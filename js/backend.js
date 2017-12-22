@@ -21,6 +21,8 @@
     });
 
     xhr.timeout = 10000;
+
+    return xhr;
   };
 
   var backend = {

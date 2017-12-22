@@ -1,4 +1,8 @@
 'use strict';
+<<<<<<< HEAD
+=======
+
+>>>>>>> module7-task1
 (function () {
   // Показывает скрытый блок карты
   var userDialog = document.querySelector('.map');
@@ -16,6 +20,7 @@
   */
   function activeSitePageHandle() {
     var filterPanel = document.querySelector('.map__filters');
+<<<<<<< HEAD
 
     userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
     formElement.classList.remove('notice__form--disabled'); // Убрать затемнение с карты формы
@@ -43,4 +48,35 @@
     form.reset();
   });
 })();
+=======
 
+    userDialog.classList.remove('map--faded'); // Убрать затемнение с карты
+    formElement.classList.remove('notice__form--disabled'); // Убрать затемнение с карты формы
+    window.fieldsetsToggle(formFieldsets);
+
+    // Загрузка данных с сервера
+    window.backend.load(window.backend.errorHandler, window.backend.errorHandler);
+
+    pinStart.removeEventListener('mouseup', activeSitePageHandle);
+
+    // Вешается обработчик фильтров
+    filterPanel.addEventListener('change', window.filtersChangeHandler);
+  }
+
+
+  pinStart.addEventListener('mouseup', activeSitePageHandle);
+>>>>>>> module7-task1
+
+  /*
+  * Слушает отправку формы, сбрасывает действия по умолчанию и делает то что надо
+  *
+  */
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(form), function () {
+      userDialog.classList.add('hidden');
+    }, window.backend.errorHandler);
+    form.reset();
+  });
+
+})();
