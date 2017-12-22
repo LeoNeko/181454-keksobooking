@@ -8,23 +8,34 @@
 (function () {
 
   var formElement = document.querySelector('.notice__form');
-
-  // Поле адресс
   var inputAdress = formElement.querySelector('#address');
-  inputAdress.setAttribute('readonly', 'readonly');
-  inputAdress.setAttribute('required', 'required');
-
-  inputAdress.value = 'Здесь должен быть адресс';
-
-  // Поле названия
   var inputTittle = formElement.querySelector('#title');
-  inputTittle.setAttribute('required', 'required');
-
-  // Поле цены
   var inputPrice = formElement.querySelector('#price');
-  inputPrice.setAttribute('placeholder', '1000');
-  inputPrice.value = 1000;
+  var numberRooms = document.querySelector('#room_number');
+  var numberGuests = document.querySelector('#capacity');
 
+  function setStandartParams(){
+    // Установка значения по умолчанию
+    numberGuests.options.selectedIndex = 2;
+    disabledOptionsGuests(numberGuests.options, '1');
+
+    // Поле адресс
+    inputAdress.setAttribute('readonly', 'readonly');
+    inputAdress.setAttribute('required', 'required');
+
+    fillAdressInput('375px', '600px');
+    console.log(window.pinStart);
+    console.log(window.pinStart.style.top, window.pinStart.style.left);
+    // Поле названия по умолчанию
+
+    inputTittle.setAttribute('required', 'required');
+
+    // Поле цены по умолчанию
+    inputPrice.setAttribute('placeholder', '1000');
+    inputPrice.value = 1000;
+  }
+
+  window.setStandartParams = setStandartParams;
   /* ---------------------------------------------------------------------------
   *
   * Заполнение поля адреса
@@ -80,14 +91,13 @@
     var allInputs = formElement.querySelectorAll('input');
 
     for (var i = 0; i < allInputs.length; i++) {
-      if (!allInputs[i].validity.valid || !allInputs[i].validity.valueMissing) {
+      if (!allInputs[i].validity.valid) {
         allInputs[i].setAttribute('style', 'border: 2px solid red;');
       } else {
         allInputs[i].removeAttribute('style');
       }
     }
   });
-
   /* -----------------------------------------------------------------------------
   *
   * Согласование времени заезда и выезда
@@ -139,12 +149,6 @@
   * Синхронизация количество комнат и количество гостей
   *
   */
-
-  var numberRooms = document.querySelector('#room_number');
-  var numberGuests = document.querySelector('#capacity');
-  // Установка значения по умолчанию
-  numberGuests.options.selectedIndex = 2;
-  disabledOptionsGuests(numberGuests.options, '1');
 
   function disabledOptionsGuests(arr, value) {
     for (var i = 0; i < arr.length; i++) {
