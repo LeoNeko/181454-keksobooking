@@ -2,20 +2,20 @@
 
 (function () {
 
-    function isOff(feature) {
-      return feature === false;
-    }
+  function isOff(feature) {
+    return feature === false;
+  }
 
-    function priceToString(price) {
-      switch (true) {
-        case price < 10000:
-          return 'low';
-        case price < 50000:
-          return 'middle';
-        default:
-          return 'high';
-      }
+  function priceToString(price) {
+    switch (true) {
+      case price < 10000:
+        return 'low';
+      case price < 50000:
+        return 'middle';
+      default:
+        return 'high';
     }
+  }
 
   function filterProcess(selects, checkboxes) {
     var filterResult = [];
