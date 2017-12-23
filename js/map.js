@@ -41,7 +41,11 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.backend.save(new FormData(form), function () {
+<<<<<<< HEAD
       setStandartParams();
+=======
+      window.setStandartParams();
+>>>>>>> module7-task1
     }, window.backend.errorHandler);
     form.reset();
   });

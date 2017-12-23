@@ -14,7 +14,11 @@
   var numberRooms = document.querySelector('#room_number');
   var numberGuests = document.querySelector('#capacity');
 
+<<<<<<< HEAD
   function setStandartParams(){
+=======
+  function setStandartParams() {
+>>>>>>> module7-task1
     // Установка значения по умолчанию
     numberGuests.options.selectedIndex = 2;
     disabledOptionsGuests(numberGuests.options, '1');
@@ -24,12 +28,19 @@
     inputAdress.setAttribute('required', 'required');
 
     fillAdressInput('375px', '600px');
+<<<<<<< HEAD
     console.log(window.pinStart);
     console.log(window.pinStart.style.top, window.pinStart.style.left);
     // Поле названия по умолчанию
 
     inputTittle.setAttribute('required', 'required');
 
+=======
+
+    // Поле названия по умолчанию
+    inputTittle.setAttribute('required', 'required');
+
+>>>>>>> module7-task1
     // Поле цены по умолчанию
     inputPrice.setAttribute('placeholder', '1000');
     inputPrice.value = 1000;
@@ -66,12 +77,17 @@
   *
   * Валидация поля цены
   */
+
+  const BELOW_VALUE = 0;
+  const OVER_VALUE = 1000000;
+  const EMPTY_VALUE = '';
+
   inputPrice.addEventListener('change', function (evt) {
     var target = evt.target;
-    if (target.value < 0 || target.value === '') {
+    if (target.value < BELOW_VALUE || target.value === EMPTY_VALUE) {
       target.setAttribute('style', 'border: 2px solid red;');
       target.setCustomValidity('Сумма должна быть больше нуля');
-    } else if (target.value > 1000000) {
+    } else if (target.value > OVER_VALUE) {
       target.setAttribute('style', 'border: 2px solid red;');
       target.setCustomValidity('Да вы прифегели батюшка!');
     } else {

@@ -76,12 +76,12 @@
       window.fillAdressInput(pinMainElement.style.top, pinMainElement.style.left);
     }
 
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
+    function onMouseUp(event) {
+      event.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-    };
+    }
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);

@@ -78,6 +78,8 @@
   * {arr} - массив булевых значений
   *
   */
+  const NUMBER_RENDER = 5;
+
   function renderFilterApply(arrBools) {
     var unCgangeArr = window.xhr;
     var similarListElement = document.querySelector('.map__pins');
@@ -90,12 +92,11 @@
       return accumulator;
     }, []);
 
-    for (var i = 0; i < nameLengths.length; i++) {
-      if (i > 5) {
-        break;
+    nameLengths.forEach(function(item, i, nameLengths) {
+      if (i < NUMBER_RENDER) {
+        fragment.appendChild(window.renderRented(nameLengths[i], nameLengths));
       }
-      fragment.appendChild(window.renderRented(nameLengths[i], nameLengths));
-    }
+    });
 
     for (var j = 0; j < activePins.length; j++) {
       if (j !== 0) {
