@@ -12,8 +12,8 @@
   */
 
   var CLICK_KEY = 0;
-  const ENTER_KEY = 13;
-  const ESC_KEY = 27;
+  var ENTER_KEY = 13;
+  var ESC_KEY = 27;
 
   function dialogCanOpen(event) {
     return event.button === CLICK_KEY || event.keyCode === ENTER_KEY;

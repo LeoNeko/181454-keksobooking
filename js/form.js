@@ -14,11 +14,7 @@
   var numberRooms = document.querySelector('#room_number');
   var numberGuests = document.querySelector('#capacity');
 
-<<<<<<< HEAD
-  function setStandartParams(){
-=======
   function setStandartParams() {
->>>>>>> module7-task1
     // Установка значения по умолчанию
     numberGuests.options.selectedIndex = 2;
     disabledOptionsGuests(numberGuests.options, '1');
@@ -28,19 +24,10 @@
     inputAdress.setAttribute('required', 'required');
 
     fillAdressInput('375px', '600px');
-<<<<<<< HEAD
-    console.log(window.pinStart);
-    console.log(window.pinStart.style.top, window.pinStart.style.left);
-    // Поле названия по умолчанию
-
-    inputTittle.setAttribute('required', 'required');
-
-=======
 
     // Поле названия по умолчанию
     inputTittle.setAttribute('required', 'required');
 
->>>>>>> module7-task1
     // Поле цены по умолчанию
     inputPrice.setAttribute('placeholder', '1000');
     inputPrice.value = 1000;
