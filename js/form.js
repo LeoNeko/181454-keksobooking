@@ -65,9 +65,9 @@
   * Валидация поля цены
   */
 
-  const BELOW_VALUE = 0;
-  const OVER_VALUE = 1000000;
-  const EMPTY_VALUE = '';
+  var BELOW_VALUE = 0;
+  var OVER_VALUE = 1000000;
+  var EMPTY_VALUE = '';
 
   inputPrice.addEventListener('change', function (evt) {
     var target = evt.target;

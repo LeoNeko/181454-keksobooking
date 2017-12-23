@@ -92,7 +92,7 @@
       return accumulator;
     }, []);
 
-    nameLengths.forEach( function(item, i) {
+    nameLengths.forEach(function (item, i) {
       if (i < NUMBER_RENDER) {
         fragment.appendChild(window.renderRented(nameLengths[i], nameLengths));
       }
