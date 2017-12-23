@@ -64,12 +64,17 @@
   *
   * Валидация поля цены
   */
+
+  const BELOW_VALUE = 0;
+  const OVER_VALUE = 1000000;
+  const EMPTY_VALUE = '';
+
   inputPrice.addEventListener('change', function (evt) {
     var target = evt.target;
-    if (target.value < 0 || target.value === '') {
+    if (target.value < BELOW_VALUE || target.value === EMPTY_VALUE) {
       target.setAttribute('style', 'border: 2px solid red;');
       target.setCustomValidity('Сумма должна быть больше нуля');
-    } else if (target.value > 1000000) {
+    } else if (target.value > OVER_VALUE) {
       target.setAttribute('style', 'border: 2px solid red;');
       target.setCustomValidity('Да вы прифегели батюшка!');
     } else {

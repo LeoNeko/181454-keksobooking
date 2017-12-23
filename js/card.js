@@ -10,8 +10,13 @@
   *
   * @param {Object} - объект события
   */
+
+  const CLICK_KEY = 0;
+  const ENTER_KEY = 13;
+  const ESC_KEY = 27;
+
   function dialogCanOpen(event) {
-    return event.button === 0 || event.keyCode === 13;
+    return event.button === CLICK_KEY || event.keyCode === ENTER_KEY;
   }
 
   /* ---------------------------------------------------------------------------
@@ -89,7 +94,7 @@
   *
   */
   function keydownEscClosePopup(event, allPins) {
-    if (event.keyCode === 27) {
+    if (event.keyCode === ESC_KEY) {
       var popup = userDialog.querySelector('.popup');
       if (popup) {
         userDialog.removeChild(popup);

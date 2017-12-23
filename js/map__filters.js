@@ -7,14 +7,11 @@
   }
 
   function priceToString(price) {
-    switch (true) {
-      case price < 10000:
-        return 'low';
-      case price < 50000:
-        return 'middle';
-      default:
-        return 'high';
-    }
+    if (price < 10000) {
+      return 'low';
+    } else if (price < 50000) {
+      return 'middle';
+    } else return 'high';
   }
 
   function filterProcess(selects, checkboxes) {
