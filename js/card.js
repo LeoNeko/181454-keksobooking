@@ -27,6 +27,7 @@
   function dialogOpenHandler(event, rentaArr) {
     var pin = event.currentTarget;
     var adNumber = 0;
+    var MAX_ELEMENTS = 5;
     var allPins = pin.parentNode.querySelectorAll('.map__pin--active');
     var activePinAlredy = userDialog.querySelector('.map__card');
     var mapPinSelectorActive = document.querySelectorAll('.map__pin');
@@ -41,7 +42,7 @@
       window.makePinActive(pin);
 
       // Ищем элемент на котором сработало событие
-      for (var i = 0; i <= 5; i++) {
+      for (var i = 0; i <= MAX_ELEMENTS; i++) {
         if (mapPinSelectorActive[i].getAttribute('class') === 'map__pin map__pin--active') {
           adNumber = i - 1;
           break;
@@ -83,7 +84,7 @@
   */
   function keydownClickClosePopup(event, allPins) {
     var popup = userDialog.querySelector('.popup');
-    if (event.button === 0 || event.keyCode === 13) {
+    if (event.button === CLICK_KEY || event.keyCode === ENTER_KEY) {
       userDialog.removeChild(popup);
     }
     window.makePinsInactive(allPins);

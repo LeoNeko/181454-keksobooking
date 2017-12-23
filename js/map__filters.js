@@ -1,15 +1,17 @@
 'use strict';
 
 (function () {
+  var MIN_PRICE_LOW = 10000;
+  var MAX_PRICE_MIDDLE = 50000;
 
   function isOff(feature) {
     return feature === false;
   }
 
   function priceToString(price) {
-    if (price < 10000) {
+    if (price < MIN_PRICE_LOW) {
       return 'low';
-    } else if (price < 50000) {
+    } else if (price < MAX_PRICE_MIDDLE) {
       return 'middle';
     } else {
       return 'high';

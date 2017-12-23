@@ -2,12 +2,15 @@
 
 (function () {
 
+  var GOOD_STATUS = 200;
+  var MAX_ELEMENTS_RENDER = 5;
+
   var setup = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === GOOD_STATUS) {
         onSuccess(xhr.response);
       } else {
         onError(xhr.response);
@@ -32,13 +35,13 @@
       xhr.responseType = 'json';
 
       xhr.addEventListener('load', function () {
-        if (xhr.status === 200) {
+        if (xhr.status === GOOD_STATUS) {
           var userDialog = document.querySelector('.map');
           var similarListElement = userDialog.querySelector('.map__pins');
           var fragment = document.createDocumentFragment();
 
           // Цикл формирования разметки плашек
-          for (var i = 0; i < 5; i++) {
+          for (var i = 0; i < MAX_ELEMENTS_RENDER; i++) {
             fragment.appendChild(window.renderRented(xhr.response[i], xhr.response));
           }
 

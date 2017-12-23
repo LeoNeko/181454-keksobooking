@@ -49,11 +49,14 @@
   *
   * Валидация поля Заголовка объявления
   */
+  var MAX_LETTERS = 100;
+  var MIN_LETTERS = 30;
+
   inputTittle.addEventListener('change', function (evt) {
     var target = evt.target;
-    if (target.value.length < 30) {
+    if (target.value.length < MIN_LETTERS) {
       target.setCustomValidity('Имя должно состоять минимум из 30-х символов');
-    } else if (target.value.length > 100) {
+    } else if (target.value.length > MAX_LETTERS) {
       target.setCustomValidity('Имя должно состоять максимум из 100-х символов');
     } else {
       target.setCustomValidity('');
