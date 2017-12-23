@@ -11,7 +11,9 @@
       return 'low';
     } else if (price < 50000) {
       return 'middle';
-    } else return 'high';
+    } else {
+      return 'high';
+    }
   }
 
   function filterProcess(selects, checkboxes) {

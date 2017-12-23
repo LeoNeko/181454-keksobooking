@@ -78,7 +78,7 @@
   * {arr} - массив булевых значений
   *
   */
-  const NUMBER_RENDER = 5;
+  var NUMBER_RENDER = 5;
 
   function renderFilterApply(arrBools) {
     var unCgangeArr = window.xhr;

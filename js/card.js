@@ -11,7 +11,7 @@
   * @param {Object} - объект события
   */
 
-  const CLICK_KEY = 0;
+  var CLICK_KEY = 0;
   const ENTER_KEY = 13;
   const ESC_KEY = 27;
 
